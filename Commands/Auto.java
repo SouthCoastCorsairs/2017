@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auto extends CommandGroup {
 
     public Auto() {
-    	//addSequential(new DriveStraightCmd(30));
+    	addSequential(new DriveStraightCmd(30));
     	addSequential(new GyroTurnCmd(-35));
-    	//addSequential(new PixyCmd());
-    	//addSequential(new DriveStraightCmd(24)); //May need to change later
-    	//addSequential(new AutoPocketCmd(2.0));
+    	addSequential(new PixyCmd());
+    	addSequential(new DriveStraightCmd(24)); //May need to change later
+    	addSequential(new AutoPocketCmd(2.0));
     	
     	
     	
