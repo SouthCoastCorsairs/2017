@@ -33,9 +33,6 @@ public class GyroTurnCmd extends Command {
     	
     	Robot.drivetrain.setTurnSpeed(speed);
     	
-    	if (Robot.drivetrain.getAngle() < 0) {
-    		Robot.drivetrain.setTurnSpeed(-speed);
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
