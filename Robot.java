@@ -118,7 +118,7 @@ public class Drivetrain extends Subsystem {
     	speed = headingCorrection(target);
     	
     	if (speed > .5846){
-    		speed = .5846;
+    		speed = .5846; //Hehe
     	}
     	if(speed < -.5846){ 
     		speed = -.5846;
