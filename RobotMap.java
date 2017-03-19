@@ -15,17 +15,18 @@ public class RobotMap {
 	public static final int BACK_RIGHT_DRIVE = 3; //3
 	public static final int FRONT_RIGHT_DRIVE = 2; //2
 	public static final int POCKET_OPENER = 4; //4
-	public static final int ROPE_CLIMBER = 5; //5
+	public static final int ROPE_CLIMBER_SPARK = 5; //5
+	public static final int ROPE_CLIMBER_TALON = 6; //6
 	
 	//ENCODERS
-	public static final int DRIVE_ENCODER_A = 2;
-	public static final int DRIVE_ENCODER_B = 1;
-	public static final int DRIVE_ENCODER_A2 = 3;
-	public static final int DRIVE_ENCODER_B2 = 4;
+	public static final int DRIVE_ENCODER_A = 2; //2
+	public static final int DRIVE_ENCODER_B = 1; //1
+	public static final int DRIVE_ENCODER_A2 = 3; //3
+	public static final int DRIVE_ENCODER_B2 = 4; //4
 	
 	//PIDs
-	public static final double P_DRIVE = 1.0;
-	public static final double I_DRIVE = 0.0;
-	public static final double D_DRIVE = 0.0;
+	public static final double P_DRIVE = 1.0; //1.0
+	public static final double I_DRIVE = 0.0; //0.0
+	public static final double D_DRIVE = 0.0; //0.0
 	
 }
