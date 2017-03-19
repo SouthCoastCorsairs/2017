@@ -22,18 +22,22 @@ public class Drivetrain extends Subsystem {
 	
 	public static final double REDUCE_TURNPOWER = .90;
 
+   //MOTORS
    private Talon frontleftDrive = new Talon(RobotMap.FRONT_LEFT_DRIVE);
    private Talon frontrightDrive = new Talon(RobotMap.FRONT_RIGHT_DRIVE);
    private Talon backleftDrive = new Talon(RobotMap.BACK_LEFT_DRIVE);
    private Talon backrightDrive = new Talon(RobotMap.BACK_RIGHT_DRIVE);
    
+   //GYRO
    public final AHRS ahrs = new AHRS(SPI.Port.kMXP);
    
+   //ENCODERS
    public Encoder driveEncoder = new Encoder(RobotMap.DRIVE_ENCODER_A, RobotMap.DRIVE_ENCODER_B);
    public Encoder driveEncoderLeft = new Encoder(RobotMap.DRIVE_ENCODER_A2, RobotMap.DRIVE_ENCODER_B2);
+   
    public PIDController driveDistancePID = new PIDController(RobotMap.P_DRIVE, RobotMap.I_DRIVE, RobotMap.D_DRIVE, new DriveDistanceSource(), new DriveDistanceOutput());
    
-   final double GYRO_P = (0.0196);
+    final double GYRO_P = (0.018); //P value of the gyro (may change) 0.0196
     public boolean timerStart = false;
 	public boolean atTarget = false;
 	public Timer timer = new Timer();
@@ -44,7 +48,7 @@ public class Drivetrain extends Subsystem {
         setDefaultCommand(new DriveWithJoystickCmd());
     }
     
-    public void drive(double turnPower, double fowardPower) {
+    public void drive(double turnPower, double fowardPower) { //Arcade drive for teleop
     	turnPower *= REDUCE_TURNPOWER;
     	frontleftDrive.set(- fowardPower + (turnPower));
     	backleftDrive.set(- fowardPower + (turnPower));
@@ -52,17 +56,17 @@ public class Drivetrain extends Subsystem {
     	backrightDrive.set(fowardPower + (turnPower));
     }
     
-    public void tankDrive(double leftPower, double rightPower) {
+    public void tankDrive(double leftPower, double rightPower) { //Tank drive for autonomous
     	//turnPower *= REDUCE_TURNPOWER;
     	frontleftDrive.set(leftPower);
     	backleftDrive.set(leftPower);
     	frontrightDrive.set(rightPower);
     	backrightDrive.set(rightPower);
     }
-    public void stopTank() {
+    public void slowDown() {
     	this.tankDrive(0, 0);
     }
-    public void slowDown() {
+    public void stopTank() {
     	this.tankDrive(0, 0);
     	
     	if (driveEncoder.get() > (driveEncoderLeft.get() + 10)) {
@@ -84,7 +88,7 @@ public class Drivetrain extends Subsystem {
     }
     
     public void initEncoder() {
-    	driveEncoder.setDistancePerPulse(6*Math.PI / 360);
+    	driveEncoder.setDistancePerPulse(6*Math.PI / 360); 
     	driveEncoderLeft.setDistancePerPulse(6*Math.PI / 360);
     }
     public boolean isAtDistance(double distance) {
@@ -117,11 +121,11 @@ public class Drivetrain extends Subsystem {
 
     	speed = headingCorrection(target);
     	
-    	if (speed > .7){
-    		speed = .7;
+    	if (speed > .20){
+    		speed = .20; 
     	}
-    	if(speed < -.7){ 
-    		speed = -.7;
+    	if(speed < -.20){ 
+    		speed = -.20;
     	}
     	
     	if (speed < .13 && speed > 0){//real robot is .25 everywhere
@@ -136,7 +140,7 @@ public class Drivetrain extends Subsystem {
     }
     
     public void setTurnSpeed(double speed){
-    	tankDrive((speed) *0.15, 0);
+    	tankDrive((speed), (speed));
     }
     
 //Logic Methods
@@ -154,27 +158,30 @@ public class Drivetrain extends Subsystem {
     	}
 
     	if ((error < 5) && (error > -5)){
-    		if(timerStart == false){
-   				timerStart = true;
-   				timer.start();
+    		return true;
+    	}
+    	else {
+    		return false;
+
+    		//if(timerStart == false){
+//   				timerStart = true;
+//   				timer.start();
    			}
     		
-   		}
-   	
-   		else{
-   		
-   			if(timerStart == true){
-    			timer.stop();
-    			timer.reset();
-    			timerStart = false;
-   			}
-   		}
+//   		}else{
+//   		
+//   			if(timerStart == true){
+//    			timer.stop();
+//    			timer.reset();
+//    			timerStart = false;
+//   			}
+    
     	
-   		if(timer.get() >.25){
-   			atTarget = true;
-    	}
+//   		if(timer.get() >.25){
+//   			atTarget = true;
+//    	}
     	
-    	return atTarget;
+//    	return atTarget;
     	
     }
     
@@ -221,6 +228,7 @@ public class Drivetrain extends Subsystem {
     }
     public void resetDriveEncoders() {
     	driveEncoder.reset();
+    	driveEncoderLeft.reset();
     }
 }
 
