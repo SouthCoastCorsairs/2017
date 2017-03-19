@@ -11,31 +11,36 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	private Joystick logistick = new Joystick(0); //Driving Joystick in port (x)
+	private Joystick logistick = new Joystick(0); //Driving Joystick
 	//Ports are here 
-	private Joystick logistick2 = new Joystick(1); //Manipulating Joystick in port (y)
+	private Joystick logistick2 = new Joystick(1); //Manipulating Joystick
 	
 	Button ropeButton = new JoystickButton(logistick2, 1);
+	Button ropeButton2 = new JoystickButton(logistick2, 5);
+	Button ropeButton3 = new JoystickButton(logistick2, 6);
 	Button quarterButton = new JoystickButton(logistick, 5);
 	Button halfButton = new JoystickButton(logistick, 3);
 	Button fullButton = new JoystickButton(logistick, 6);
+	Button ropeButton4 = new JoystickButton(logistick2, 3);
+	Button ropeButton5 = new JoystickButton(logistick2, 4);
+	Button slowButton = new JoystickButton(logistick, 4);
 	
 	
 	
-	public double getJoystickY() {
+	public double getJoystickY() { //Gets the y axis of the driving joystick
 		return logistick.getRawAxis(1);
 		//Beam me up captain!
 	}
 	
-	public double getJoystickX() {
+	public double getJoystickX() { //Gets the x axis of the driving joystick
 		return logistick.getRawAxis(0);
 	}
 	
-	public double getJoystick2X() {
+	public double getJoystick2X() { //Gets the x axis of the manipulating joystick
 		return logistick2.getRawAxis(0);
 	}
 	
-	public double getJoystick2Y() {
+	public double getJoystick2Y() { //Gets the y axis of the manipulating joystick
 		return logistick2.getRawAxis(1);
 	}
 	
@@ -45,31 +50,48 @@ public class OI {
 	
 	//// CREATING BUTTONS
 	
-	public boolean getButton5() {
+	public boolean getButton5() { //Gets button 5 on the driving joystick
 		return logistick.getRawButton(5);
 		//Take it nice and slow
 	}
 	
-	public boolean getButton3() {
+	public boolean getButton3() { //Gets button 3 on the driving joystick
 		return logistick.getRawButton(3);
 		//Let's go FASTER
 	}
 	
-	public boolean getButton6() {
+	public boolean getButton6() { //Gets button 6 on the driving joystick
 		return logistick.getRawButton(6);
 		//WAAAY TOO FAAST!!!!!!!
 	}
 	
-	public boolean getButton1() {
+	public boolean getButton1() { //Gets button 1 (trigger) on the manipulating joystick
 		return logistick2.getRawButton(1);
 	}
 	
-	public boolean reverseButton() {
+	public boolean reverseButton() { //Gets button 1 (trigger) on the driving joystick
 		return logistick.getRawButton(1);
 	}
 	
+	public boolean climbButton5() {
+		return logistick2.getRawButton(5);
+	}
 	
+	public boolean climbButton6() {
+		return logistick2.getRawButton(6);
+	}
 	
+	public boolean climbButton3() {
+		return logistick2.getRawButton(3);
+	}
+	
+	public boolean climbButton4() {
+		return logistick2.getRawButton(4);
+	}
+	
+	public boolean getButton4() {
+		return logistick.getRawButton(4);
+	}
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
