@@ -1,226 +1,185 @@
-package org.usfirst.frc.team5846.robot.subsystems;
 
-import org.usfirst.frc.team5846.robot.Robot;
-import org.usfirst.frc.team5846.robot.RobotMap;
-import org.usfirst.frc.team5846.robot.commands.DriveWithJoystickCmd;
+package org.usfirst.frc.team5846.robot;
 
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team5846.robot.commands.LeftPegAuto;
+import org.usfirst.frc.team5846.robot.commands.DriveStraightCmd;
+import org.usfirst.frc.team5846.robot.commands.GyroTurnCmd;
+import org.usfirst.frc.team5846.robot.commands.PixyCmd;
+import org.usfirst.frc.team5846.robot.commands.RightPegAuto;
+import org.usfirst.frc.team5846.robot.commands.MiddlePegAuto;
+import org.usfirst.frc.team5846.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team5846.robot.subsystems.PID;
+import org.usfirst.frc.team5846.robot.subsystems.PocketOpener;
+import org.usfirst.frc.team5846.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team5846.robot.subsystems.Vision;
+
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
 
 /**
- *
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the IterativeRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the manifest file in the resource
+ * directory.
  */
-public class Drivetrain extends Subsystem {
+public class Robot extends IterativeRobot {
 	
-	public static final double REDUCE_TURNPOWER = .90;
 
-   private Talon frontleftDrive = new Talon(RobotMap.FRONT_LEFT_DRIVE);
-   private Talon frontrightDrive = new Talon(RobotMap.FRONT_RIGHT_DRIVE);
-   private Talon backleftDrive = new Talon(RobotMap.BACK_LEFT_DRIVE);
-   private Talon backrightDrive = new Talon(RobotMap.BACK_RIGHT_DRIVE);
-   
-   public final AHRS ahrs = new AHRS(SPI.Port.kMXP);
-   
-   public Encoder driveEncoder = new Encoder(RobotMap.DRIVE_ENCODER_A, RobotMap.DRIVE_ENCODER_B);
-   public Encoder driveEncoderLeft = new Encoder(RobotMap.DRIVE_ENCODER_A2, RobotMap.DRIVE_ENCODER_B2);
-   public PIDController driveDistancePID = new PIDController(RobotMap.P_DRIVE, RobotMap.I_DRIVE, RobotMap.D_DRIVE, new DriveDistanceSource(), new DriveDistanceOutput());
-   
-   final double GYRO_P = (0.0196);
-    public boolean timerStart = false;
-	public boolean atTarget = false;
-	public Timer timer = new Timer();
-   //Defining the motors and stuff for each side of the drive train
+	public static OI oi;
+	public static Drivetrain drivetrain = new Drivetrain();
+	public static PocketOpener pocketopener = new PocketOpener();
+	public static RopeClimber ropeclimber = new RopeClimber();
+	public static Vision vision = new Vision();
+	public static PID pid = new PID();
+	Command autonomousCommand;
+	SendableChooser<Command> chooser = new SendableChooser<>();
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new DriveWithJoystickCmd());
-    }
-    
-    public void drive(double turnPower, double fowardPower) {
-    	turnPower *= REDUCE_TURNPOWER;
-    	frontleftDrive.set(- fowardPower + (turnPower));
-    	backleftDrive.set(- fowardPower + (turnPower));
-    	frontrightDrive.set(fowardPower + (turnPower));
-    	backrightDrive.set(fowardPower + (turnPower));
-    }
-    
-    public void tankDrive(double leftPower, double rightPower) {
-    	//turnPower *= REDUCE_TURNPOWER;
-    	frontleftDrive.set(leftPower);
-    	backleftDrive.set(leftPower);
-    	frontrightDrive.set(rightPower);
-    	backrightDrive.set(rightPower);
-    }
-    public void stopTank() {
-    	this.tankDrive(0, 0);
-    }
-    public void slowDown() {
-    	this.tankDrive(0, 0);
-    	
-    	if (driveEncoder.get() > (driveEncoderLeft.get() + 10)) {
-    		while (driveEncoder.get() < (driveEncoderLeft.get() + 10)) {
-    			tankDrive(0, 0.1);
-    		}
-    		this.tankDrive(0, 0);
-    	}
-    	else if (driveEncoderLeft.get() > (driveEncoder.get() + 10)) {
-    		while (driveEncoderLeft.get() < (driveEncoder.get() + 10)) {
-    			tankDrive(-0.1, 0);
-    		}
-    		this.tankDrive(0, 0);
-    	}
-    }
-    
-    public void stop() {
-    	this.drive(0, 0);
-    }
-    
-    public void initEncoder() {
-    	driveEncoder.setDistancePerPulse(6*Math.PI / 360);
-    	driveEncoderLeft.setDistancePerPulse(6*Math.PI / 360);
-    }
-    public boolean isAtDistance(double distance) {
-    	if (driveEncoder.getDistance() > (distance) && driveEncoder.getDistance() < (distance+ 3)) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
-    }
-    
-    public double headingCorrection (double heading){
-    	double driftError = heading - getAngle();
-    	
-    	if (driftError < -180){
-    		driftError = driftError + 360;
-    	}
-    	else if (driftError > 180){
-    		driftError = driftError - 360;
-    	}
-    	
-    	
-    	return ((GYRO_P)*driftError);
-    	//setSpeed(((GYRO_P)*driftError), -((GYRO_P)*driftError));
-    	
-    }
-    
-    public double turnAngleAdditional(double target){
-    	double speed;
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	@Override
+	public void robotInit() {
+		oi = new OI();
+		chooser.addDefault("Middle Peg", new MiddlePegAuto()); //Autonomous chooser for the middle peg
+		
+		chooser.addObject("Right Peg", new RightPegAuto()); //Autonomous chooser for the right peg
+		
+		chooser.addObject("Left Peg", new LeftPegAuto()); //Autonomous chooser for the left peg
+		
+		//chooser.addObject("Pixy", new PixyCmd()); //Autonomous chooser for testing the pixy camera command
+		
+		chooser.addObject("5 Point Line", new DriveStraightCmd(100)); //Autonomous chooser for testing driving straight for 4 feet
+		
+		chooser.addObject("Turn Left", new GyroTurnCmd(60)); //Autonomous chooser for testing the turning to 35 degrees
+		
+		chooser.addObject("Turn Right", new GyroTurnCmd(-60)); //Autonomous chooser for testing the turning to -35 degrees
+		
+		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putBoolean("PIDStatus", this.drivetrain.driveDistancePID.onTarget());
+		//SmartDashboard.putNumber("PIDError", this.drivetrain.driveDistancePID.getError());
+		Robot.drivetrain.initEncoder();
+		 CameraServer.getInstance().startAutomaticCapture();
 
-    	speed = headingCorrection(target);
-    	
-    	if (speed > .5846){
-    		speed = .5846; //Hehe
-    	}
-    	if(speed < -.5846){ 
-    		speed = -.5846;
-    	}
-    	
-    	if (speed < .13 && speed > 0){//real robot is .25 everywhere
-    		speed = .13;
-    	}
-    	if(speed > -.13 && speed < 0){ 
-    		speed = -.13;
-    	}
-    	
-    	return speed;
-    	//setTurnSpeed(speed);
-    }
-    
-    public void setTurnSpeed(double speed){
-    	tankDrive((speed), (speed));
-    }
-    
-//Logic Methods
+	}
 
-    public boolean isAtTurnTarget(double target){
-    	atTarget = false;
-    	
-    	double error = target - getAngle();
-    	
-    	if (error < -180){
-    		error = error + 360;
-    	}
-    	else if (error > 180){
-    		error = error - 360;
-    	}
+	/**
+	 * This function is called once each time the robot enters Disabled mode.
+	 * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
+	 */
+	@Override
+	public void disabledInit() {
 
-    	if ((error < 5) && (error > -5)){
-    		if(timerStart == false){
-   				timerStart = true;
-   				timer.start();
-   			}
-    		
-   		}
-   	
-   		else{
-   		
-   			if(timerStart == true){
-    			timer.stop();
-    			timer.reset();
-    			timerStart = false;
-   			}
-   		}
-    	
-   		if(timer.get() >.25){
-   			atTarget = true;
-    	}
-    	
-    	return atTarget;
-    	
-    }
-    
-    private class DriveDistanceSource implements PIDSource {
+	}
 
-		@Override
-		public void setPIDSourceType(PIDSourceType pidSource) {
-			// TODO Auto-generated method stub
-			
-		}
+	@Override
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
-		@Override
-		public PIDSourceType getPIDSourceType() {
-			// TODO Auto-generated method stub
-			return PIDSourceType.kDisplacement;
-		}
+	/**
+	 * This autonomous (along with the chooser code above) shows how to select
+	 * between different autonomous modes using the dashboard. The sendable
+	 * chooser code works with the Java SmartDashboard. If you prefer the
+	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
+	 * getString code to get the auto name from the text box below the Gyro
+	 *
+	 * You can add additional auto modes by adding additional commands to the
+	 * chooser code above (like the commented example) or additional comparisons
+	 * to the switch structure below with additional strings & commands.
+	 */
+	@Override
+	public void autonomousInit() {
+		Robot.drivetrain.driveEncoder.reset();
+		Robot.drivetrain.ahrs.reset();
+		autonomousCommand = chooser.getSelected();
+		/*
+		 * String autoSelected = SmartDashboard.getString("Auto Selector",
+		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+		 * = new MyAutoCommand(); break; case "Default Auto": default:
+		 * autonomousCommand = new ExampleCommand(); break; }
+		 */
 
-		@Override
-		public double pidGet() {
-			// TODO Auto-generated method stub
-			return driveEncoder.getDistance();
-		}
-    	
-    }
-    
-    public class DriveDistanceOutput implements PIDOutput {
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null)
+			autonomousCommand.start();
+	}
 
-		@Override
-		public void pidWrite(double output) {
-			// TODO Auto-generated method stub
-			//frontleftDrive.pidWrite(output);
-			//backleftDrive.pidWrite(output);
-			//frontrightDrive.pidWrite(-output);
-			//backrightDrive.pidWrite(- output);
-			
-		}
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	@Override
+	public void autonomousPeriodic() {
+		SmartDashboard.putBoolean("isAtAngle", Robot.drivetrain.isAtTurnTarget(60)); //Is the robot at 35 degrees?
+		
+		SmartDashboard.putBoolean("isAtNegativeAngle", Robot.drivetrain.isAtTurnTarget(-60)); //Is the robot at -35 degrees?
+		
+		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getAngle()); //Gets the angle from the gyro
+		
+		SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.driveEncoder.get()); //Gets the distance in inches from the encoders
+		
+		SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.driveEncoderLeft.get());
+		
+		SmartDashboard.putNumber("Right Distance", Robot.drivetrain.driveEncoder.getDistance()); //Gets the distance in inches
+		
+		SmartDashboard.putNumber("Left Distance", Robot.drivetrain.driveEncoderLeft.getDistance());
+		
+		//SmartDashboard.putBoolean("isAtDistance", Robot.drivetrain.isAtDistance(100)); //Did the robot drive 100 inches?
+		//Vision.printPixyStuff();
+		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void teleopInit() {
+		Robot.drivetrain.driveEncoder.reset();
+		Robot.drivetrain.ahrs.reset();
+		//Vision.printPixyStuff();
+		// This makes sure that the autonomous stops running when
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null)
+			autonomousCommand.cancel();
+	}
+
+	/**
+	 * This function is called periodically during operator control
+	 */
+	@Override
+	public void teleopPeriodic() {
+		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getAngle());
+		
+		SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.driveEncoder.get());
+		
+		SmartDashboard.putNumber("Right Distance", Robot.drivetrain.driveEncoder.getDistance());
+		
+		SmartDashboard.putNumber("Left Distance", Robot.drivetrain.driveEncoderLeft.getDistance());
+		
+		//SmartDashboard.putBoolean("isAtDistance", Robot.drivetrain.isAtDistance(100));
+		
+		//SmartDashboard.putBoolean("isAtAngle", Robot.drivetrain.isAtTurnTarget(35));
+		
+		SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.driveEncoderLeft.get());
+		
+		//Vision.printPixyStuff();
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function is called periodically during test mode
+	 */
+	@Override
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }
-    public void updateSmartDashboard() {
-    	
-    	
-    }
-    public double getAngle(){
-    	return ahrs.getAngle();
-    }
-    public void resetDriveEncoders() {
-    	driveEncoder.reset();
-    }
-}
-
