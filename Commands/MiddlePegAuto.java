@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MiddlePegAuto extends CommandGroup {
 
     public MiddlePegAuto() {
-    	addSequential(new PixyCmd());
-    	addSequential(new DriveStraightCmd(53));
-    	addSequential(new AutoPocketCmd(2.0));
+    	
+    	//Steps for the middle peg autonomous
+    	
+    	//addSequential(new PixyCmd()); //Lines up the robot to the target using the pixy
+    	
+    	addSequential(new DriveStraightCmd(80)); //Drive straight for x inches
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
