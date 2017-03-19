@@ -22,21 +22,25 @@ public class DriveWithJoystickCmd extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if (Robot.oi.getButton3()) {
-    		speed = 0.5;
+    	if (Robot.oi.getButton6()) { //Half speed
+    		speed = 0.75;
     	}
     	
-    	if (Robot.oi.getButton5()) {
+    	if (Robot.oi.getButton5()) { //Quarter speed
     		speed = 0.25;
     	}
     	
-    	if (Robot.oi.getButton6()) {
+    	if (Robot.oi.getButton4()) { //Full speed
     		speed = 1;
     		//Makes robot go into HYPERDRIVE!!!!!!
     	}
     	
     	if (Robot.oi.reverseButton()) {
     		speed = -0.25;
+    	}
+    	
+    	if (Robot.oi.getButton3()) {
+    		speed = 0.50;
     	}
     	Robot.drivetrain.drive((Robot.oi.getJoystickX()*speed), (Robot.oi.getJoystickY()*speed));
     }
