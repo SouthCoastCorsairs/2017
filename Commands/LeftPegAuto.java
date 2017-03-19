@@ -11,16 +11,22 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class LeftPegAuto extends CommandGroup {
 
     public LeftPegAuto() {	
-    	addSequential(new DriveStraightCmd(50));
-    	addSequential(new AutoDriveRightCmd(0.57));
-    	addSequential(new WaitCommand(1.0));
-    	addSequential(new PixyCmd());
-    	addSequential(new DriveStraightCmd(43));
-    	addSequential(new AutoPocketCmd(2.0));
-    	//addSequential(new GyroTurnCmd(-35));
     	
-    	//addSequential(new DriveStraightCmd(24)); //May need to change later
-    	//addSequential(new AutoPocketCmd(2.0));
+//Steps for the right peg autonomous
+    	
+    	addSequential(new DriveStraightCmd(70)); //Drive straight for x inches
+    	 	
+    	addSequential(new GyroTurnCmd(50)); //Turn x degrees
+    	
+    	//addSequential(new AutoTurnLeftCmd(0.74)); //Timed turning for x seconds (May change to GyroTurnCmd for precise turning)
+    	
+    	
+    	//addSequential(new WaitCommand(1.0)); //Wait for x seconds
+    	
+    	//addSequential(new PixyCmd()); //Lines up the robot to the target using the pixy
+    	
+    	addSequential(new DriveStraightCmd(35)); //Drive straight for x inches
+   
     	
     	
     	
