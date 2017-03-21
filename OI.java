@@ -29,7 +29,7 @@ public class OI {
 	
 	public double getJoystickY() { //Gets the y axis of the driving joystick
 		return logistick.getRawAxis(1);
-		//Beam me up captain!
+	
 	}
 	
 	public double getJoystickX() { //Gets the x axis of the driving joystick
@@ -52,17 +52,17 @@ public class OI {
 	
 	public boolean getButton5() { //Gets button 5 on the driving joystick
 		return logistick.getRawButton(5);
-		//Take it nice and slow
+		
 	}
 	
 	public boolean getButton3() { //Gets button 3 on the driving joystick
 		return logistick.getRawButton(3);
-		//Let's go FASTER
+		
 	}
 	
 	public boolean getButton6() { //Gets button 6 on the driving joystick
 		return logistick.getRawButton(6);
-		//WAAAY TOO FAAST!!!!!!!
+		
 	}
 	
 	public boolean getButton1() { //Gets button 1 (trigger) on the manipulating joystick
@@ -91,6 +91,10 @@ public class OI {
 	
 	public boolean getButton4() {
 		return logistick.getRawButton(4);
+	}
+	
+	public boolean getButton2() {
+		return logistick2.getRawButton(2);
 	}
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
