@@ -41,6 +41,10 @@ public class RopeClimberCmd extends Command {
     	if (Robot.oi.climbButton4()) {
     		Robot.ropeclimber.climbSpeed = -0.75;
     	}
+    	
+    	if (Robot.oi.getButton2()) {
+    		Robot.ropeclimber.climbSpeed = -1;
+    	}
     	Robot.ropeclimber.climbTheRope();
     }
 
