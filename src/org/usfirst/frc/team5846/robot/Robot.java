@@ -120,9 +120,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		SmartDashboard.putBoolean("isAtAngle", Robot.drivetrain.isAtTurnTarget(60)); //Is the robot at 35 degrees?
+		//SmartDashboard.putBoolean("isAtAngle", Robot.drivetrain.isAtTurnTarget(60)); //Is the robot at 35 degrees?
 		
-		SmartDashboard.putBoolean("isAtNegativeAngle", Robot.drivetrain.isAtTurnTarget(-60)); //Is the robot at -35 degrees?
+		//SmartDashboard.putBoolean("isAtNegativeAngle", Robot.drivetrain.isAtTurnTarget(-60)); //Is the robot at -35 degrees?
 		
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getAngle()); //Gets the angle from the gyro
 		
