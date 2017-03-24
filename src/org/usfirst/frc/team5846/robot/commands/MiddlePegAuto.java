@@ -13,7 +13,7 @@ public class MiddlePegAuto extends CommandGroup {
     	
     	//addSequential(new PixyCmd()); //Lines up the robot to the target using the pixy
     	
-    	addSequential(new DriveStraightCmd(80)); //Drive straight for x inches
+    	addSequential(new DriveStraightCmd(86)); //Drive straight for x inches
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
