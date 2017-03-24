@@ -23,7 +23,7 @@ public class Drivetrain extends Subsystem {
 	public static final double REDUCE_TURNPOWER = .90;
 
    //MOTORS
-   private Talon frontleftDrive = new Talon(RobotMap.FRONT_LEFT_DRIVE);
+   private Talon frontleftDrive = new Talon(RobotMap.FRONT_LEFT_DRIVE); //motors
    private Talon frontrightDrive = new Talon(RobotMap.FRONT_RIGHT_DRIVE);
    private Talon backleftDrive = new Talon(RobotMap.BACK_LEFT_DRIVE);
    private Talon backrightDrive = new Talon(RobotMap.BACK_RIGHT_DRIVE);
