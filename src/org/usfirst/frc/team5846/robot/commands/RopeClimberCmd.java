@@ -31,7 +31,7 @@ public class RopeClimberCmd extends Command {
     	}
     	
     	if (Robot.oi.climbButton6()) {
-    		Robot.ropeclimber.climbSpeed = -0.60;
+    		Robot.ropeclimber.climbSpeed = -0.1;
     	}
     	
     	if (Robot.oi.climbButton3()) {
@@ -39,11 +39,11 @@ public class RopeClimberCmd extends Command {
     	}
     	
     	if (Robot.oi.climbButton4()) {
-    		Robot.ropeclimber.climbSpeed = -0.75;
+    		Robot.ropeclimber.climbSpeed = -0.90;
     	}
     	
     	if (Robot.oi.getButton2()) {
-    		Robot.ropeclimber.climbSpeed = -1;
+    		Robot.ropeclimber.climbSpeed = 80;
     	}
     	Robot.ropeclimber.climbTheRope();
     }
