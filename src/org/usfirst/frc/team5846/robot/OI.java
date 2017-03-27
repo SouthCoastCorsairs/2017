@@ -14,18 +14,7 @@ public class OI {
 	private Joystick logistick = new Joystick(0); //Driving Joystick
 	//Ports are here 
 	private Joystick logistick2 = new Joystick(1); //Manipulating Joystick
-	
-	Button ropeButton = new JoystickButton(logistick2, 1); 
-	Button ropeButton2 = new JoystickButton(logistick2, 5);
-	Button ropeButton3 = new JoystickButton(logistick2, 6);
-	Button quarterButton = new JoystickButton(logistick, 5);
-	Button halfButton = new JoystickButton(logistick, 3);
-	Button fullButton = new JoystickButton(logistick, 6);
-	Button ropeButton4 = new JoystickButton(logistick2, 3);
-	Button ropeButton5 = new JoystickButton(logistick2, 4);
-	Button slowButton = new JoystickButton(logistick, 4);
-	
-	
+
 	
 	public double getJoystickY() { //Gets the y axis of the driving joystick
 		return logistick.getRawAxis(1);
@@ -43,9 +32,6 @@ public class OI {
 	public double getJoystick2Y() { //Gets the y axis of the manipulating joystick
 		return logistick2.getRawAxis(1);
 	}
-	
-	
-	
 	
 	
 	//// CREATING BUTTONS
