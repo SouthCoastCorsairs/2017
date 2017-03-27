@@ -22,7 +22,7 @@ public class PocketOpenerCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pocketopener.Open((Robot.oi.getJoystick2Y())*openspeed);
+    	//Robot.pocketopener.Open((Robot.oi.getJoystick2Y())*openspeed);
     	
     }
 
