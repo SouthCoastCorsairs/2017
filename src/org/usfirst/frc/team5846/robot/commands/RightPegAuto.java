@@ -13,9 +13,9 @@ public class RightPegAuto extends CommandGroup {
     	
     	//Steps for the right peg autonomous
     	
-    	addSequential(new DriveStraightCmd(70)); //Drive straight for x inches
+    	addSequential(new DriveStraightCmd(53)); //Drive straight for x inches
     	 	
-    	addSequential(new GyroTurnCmd(-50)); //Turn x degrees
+    	addSequential(new GyroTurnCmd(-60)); //Turn x degrees
     	
     	//addSequential(new AutoTurnLeftCmd(0.74)); //Timed turning for x seconds (May change to GyroTurnCmd for precise turning)
     	
@@ -24,7 +24,7 @@ public class RightPegAuto extends CommandGroup {
     	
     	//addSequential(new PixyCmd()); //Lines up the robot to the target using the pixy
     	
-    	addSequential(new DriveStraightCmd(40)); //Drive straight for x inches
+    	addSequential(new DriveStraightCmd(85)); //Drive straight for x inches
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		
 		chooser.addDefault("Middle Peg", new MiddlePegAuto()); //Autonomous chooser for the middle peg
 		
 		chooser.addObject("Right Peg", new RightPegAuto()); //Autonomous chooser for the right peg
@@ -111,8 +112,7 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		autonomousCommand.start();
 	}
 
 	/**
