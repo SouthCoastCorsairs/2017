@@ -22,7 +22,7 @@ public class DriveWithJoystickCmd extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if (Robot.oi.getButton6()) { //Half speed
+    	if (Robot.oi.getButton6()) { //75% speed
     		speed = 0.75;
     	}
     	
