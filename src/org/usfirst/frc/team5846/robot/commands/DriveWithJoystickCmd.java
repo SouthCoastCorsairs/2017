@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 	
 public class DriveWithJoystickCmd extends Command {
-	double speed = 1;
+	public double speed = 1;
 //This is the speed of the robot
     public DriveWithJoystickCmd() {
        requires(Robot.drivetrain);

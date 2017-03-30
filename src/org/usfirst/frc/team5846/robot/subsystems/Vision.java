@@ -43,11 +43,11 @@ public class Vision extends Subsystem {
     		char width = (char) ((pixyValues[i + 11] & 0xff << 8) | pixyValues[i + 10] & 0xff);
     		char height = (char) ((pixyValues[i + 13] & 0xff << 8) | pixyValues[i + 12] & 0xff);
     		
-    		SmartDashboard.putNumber("xPosition", xPosition);
-    		SmartDashboard.putNumber("yPosition", yPosition);
-    		SmartDashboard.putNumber("width", width);
-			SmartDashboard.putNumber("height", height);
-			SmartDashboard.putNumber("Raw 5", pixyValues[5]);
+    		//SmartDashboard.putNumber("xPosition", xPosition);
+    		//SmartDashboard.putNumber("yPosition", yPosition);
+    		//SmartDashboard.putNumber("width", width);
+			//SmartDashboard.putNumber("height", height);
+			//SmartDashboard.putNumber("Raw 5", pixyValues[5]);
 		}
 }
     

@@ -3,6 +3,7 @@ package org.usfirst.frc.team5846.robot;
 
 import org.usfirst.frc.team5846.robot.commands.LeftPegAuto;
 import org.usfirst.frc.team5846.robot.commands.DriveStraightCmd;
+import org.usfirst.frc.team5846.robot.commands.DriveWithJoystickCmd;
 import org.usfirst.frc.team5846.robot.commands.GyroTurnCmd;
 import org.usfirst.frc.team5846.robot.commands.PixyCmd;
 import org.usfirst.frc.team5846.robot.commands.RightPegAuto;
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static PocketOpener pocketopener = new PocketOpener();
 	public static RopeClimber ropeclimber = new RopeClimber();
+	public static DriveWithJoystickCmd arcadedrive = new DriveWithJoystickCmd();
 	public static Vision vision = new Vision();
 	public static PID pid = new PID();
 	Command autonomousCommand;
@@ -171,8 +173,13 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putBoolean("isAtAngle", Robot.drivetrain.isAtTurnTarget(35));
 		
 		SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.driveEncoderLeft.get());
-		
+		 
 		//Vision.printPixyStuff();
+		
+		SmartDashboard.putNumber("Rope Speed", Robot.ropeclimber.climbSpeed);
+		
+		SmartDashboard.putNumber("Robot Speed", Robot.arcadedrive.speed);
+		
 		Scheduler.getInstance().run();
 	}
 

@@ -46,6 +46,7 @@ public class RopeClimberCmd extends Command {
     		Robot.ropeclimber.climbSpeed = 80;
     	}
     	Robot.ropeclimber.climbTheRope();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

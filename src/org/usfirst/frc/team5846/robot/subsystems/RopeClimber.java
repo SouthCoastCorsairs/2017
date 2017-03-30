@@ -37,7 +37,6 @@ public class RopeClimber extends Subsystem {
 	}
 	
 	
-	
 
 }
 
