@@ -35,10 +35,10 @@ public class DriveStraightCmd extends Command {
     protected void execute() {
     	HeadingError = CurrentHeading - Robot.drivetrain.getAngle();
     	if (HeadingError > 1) {
-    		LeftSpeed = 0.30; //the speed for error correction (drifting)
+    		LeftSpeed = 0.30; //the speed for error correction (drifting) RAISE THIS IF IT DRIFTS
     	}
     	else if (HeadingError < -1) {
-    		RightSpeed = 0.30; //Error correction for right side
+    		RightSpeed = 0.30; //Error correction for right side  RAISE THIS IF IT DRIFTS
     	}
     	else {
     		LeftSpeed = RightSpeed = 0.20; 
