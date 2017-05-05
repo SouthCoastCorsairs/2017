@@ -14,7 +14,7 @@ public class RobotMap {
 	public static final int FRONT_LEFT_DRIVE = 0; //0
 	public static final int BACK_RIGHT_DRIVE = 3; //3
 	public static final int FRONT_RIGHT_DRIVE = 2; //2
-	public static final int POCKET_OPENER = 4; //4
+	//public static final int POCKET_OPENER = 4; //4
 	public static final int ROPE_CLIMBER_SPARK = 5; //5
 	public static final int ROPE_CLIMBER_TALON = 6; //6
 	

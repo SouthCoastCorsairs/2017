@@ -26,8 +26,8 @@ public class DriveStraightCmd extends Command {
     protected void initialize() {
     	Robot.drivetrain.resetDriveEncoders();
     	Robot.drivetrain.ahrs.reset();
-    	LeftSpeed = 0.20; //Speed of the left side
-    	RightSpeed = 0.20; //Speed of the right side
+    	LeftSpeed = 0.2; //Speed of the left side
+    	RightSpeed = 0.2; //Speed of the right side
     	CurrentHeading = Robot.drivetrain.getAngle();
     }
 
@@ -35,13 +35,13 @@ public class DriveStraightCmd extends Command {
     protected void execute() {
     	HeadingError = CurrentHeading - Robot.drivetrain.getAngle();
     	if (HeadingError > 1) {
-    		LeftSpeed = 0.30; //the speed for error correction (drifting) RAISE THIS IF IT DRIFTS
+    		LeftSpeed = 0.3; //the speed for error correction (drifting) RAISE THIS IF IT DRIFTS
     	}
     	else if (HeadingError < -1) {
-    		RightSpeed = 0.30; //Error correction for right side  RAISE THIS IF IT DRIFTS
+    		RightSpeed = 0.3; //Error correction for right side  RAISE THIS IF IT DRIFTS
     	}
     	else {
-    		LeftSpeed = RightSpeed = 0.20; 
+    		LeftSpeed = RightSpeed = 0.2; 
     	}
     	//if (Robot.drivetrain.driveEncoder.getDistance() > (Distance + 3)) {
     	//	Robot.drivetrain.tankDrive(-RightSpeed, LeftSpeed);

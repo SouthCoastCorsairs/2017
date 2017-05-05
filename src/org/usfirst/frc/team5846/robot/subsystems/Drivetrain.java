@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -69,18 +70,18 @@ public class Drivetrain extends Subsystem {
     public void stopTank() {
     	this.tankDrive(0, 0);
     	
-    	if (driveEncoder.get() > (driveEncoderLeft.get() + 10)) {
-    		while (driveEncoder.get() < (driveEncoderLeft.get() + 10)) {
-    			tankDrive(0, 0.1);
-    		}
-    		this.tankDrive(0, 0);
-    	}
-    	else if (driveEncoderLeft.get() > (driveEncoder.get() + 10)) {
-    		while (driveEncoderLeft.get() < (driveEncoder.get() + 10)) {
-    			tankDrive(-0.1, 0);
-    		}
-    		this.tankDrive(0, 0);
-    	}
+//    	if (driveEncoder.get() > (driveEncoderLeft.get() + 10)) {
+//    		while (driveEncoder.get() < (driveEncoderLeft.get() + 10)) {
+//    			tankDrive(0, 0.1);
+//    		}
+//    		this.tankDrive(0, 0);
+//    	}
+//    	else if (driveEncoderLeft.get() > (driveEncoder.get() + 10)) {
+//    		while (driveEncoderLeft.get() < (driveEncoder.get() + 10)) {
+//    			tankDrive(-0.1, 0);
+//    		}
+//    		this.tankDrive(0, 0);
+//    	}
     }
     
     public void stop() {
@@ -92,13 +93,16 @@ public class Drivetrain extends Subsystem {
     	driveEncoderLeft.setDistancePerPulse(6*Math.PI / 360);
     }
     public boolean isAtDistance(double distance) {
-    	if (driveEncoder.getDistance() > (distance) && driveEncoder.getDistance() < (distance+ 3)) {
+    	if (driveEncoder.getDistance() > (distance) && driveEncoderLeft.getDistance() > (distance)) {
+    		Robot.drivetrain.stopTank();
     		return true;
     	}
     	else {
     		return false;
     	}
     }
+    
+    
     
     public double headingCorrection (double heading){
     	double driftError = heading - getAngle();

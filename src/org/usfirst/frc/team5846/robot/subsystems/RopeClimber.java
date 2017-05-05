@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class RopeClimber extends Subsystem {
-	public double climbSpeed = -0.3;
+	public double climbSpeed = 0.3;
 	private Spark climbRope = new Spark(RobotMap.ROPE_CLIMBER_SPARK); //Climber motor Spark
 	private Talon climbRope2 = new Talon(RobotMap.ROPE_CLIMBER_TALON); //Climber motor Talon
 

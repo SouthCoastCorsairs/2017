@@ -1,16 +1,17 @@
 
 package org.usfirst.frc.team5846.robot;
 
-import org.usfirst.frc.team5846.robot.commands.LeftPegAuto;
+import org.usfirst.frc.team5846.robot.commands.BlueLeftPegAuto;
 import org.usfirst.frc.team5846.robot.commands.DriveStraightCmd;
 import org.usfirst.frc.team5846.robot.commands.DriveWithJoystickCmd;
 import org.usfirst.frc.team5846.robot.commands.GyroTurnCmd;
 import org.usfirst.frc.team5846.robot.commands.PixyCmd;
-import org.usfirst.frc.team5846.robot.commands.RightPegAuto;
+import org.usfirst.frc.team5846.robot.commands.RedLeftPegAuto;
+import org.usfirst.frc.team5846.robot.commands.RedRightPegAuto;
+import org.usfirst.frc.team5846.robot.commands.BlueRightPegAuto;
 import org.usfirst.frc.team5846.robot.commands.MiddlePegAuto;
 import org.usfirst.frc.team5846.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5846.robot.subsystems.PID;
-import org.usfirst.frc.team5846.robot.subsystems.PocketOpener;
 import org.usfirst.frc.team5846.robot.subsystems.RopeClimber;
 import org.usfirst.frc.team5846.robot.subsystems.Vision;
 
@@ -37,7 +38,6 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static Drivetrain drivetrain = new Drivetrain();
-	public static PocketOpener pocketopener = new PocketOpener();
 	public static RopeClimber ropeclimber = new RopeClimber();
 	public static DriveWithJoystickCmd arcadedrive = new DriveWithJoystickCmd();
 	public static Vision vision = new Vision();
@@ -55,17 +55,21 @@ public class Robot extends IterativeRobot {
 		
 		chooser.addDefault("Middle Peg", new MiddlePegAuto()); //Autonomous chooser for the middle peg
 		
-		chooser.addObject("Right Peg", new RightPegAuto()); //Autonomous chooser for the right peg
+		chooser.addObject("Blue Right Peg", new BlueRightPegAuto()); //Autonomous chooser for the right peg
 		
-		chooser.addObject("Left Peg", new LeftPegAuto()); //Autonomous chooser for the left peg
+		chooser.addObject("Blue Left Peg", new BlueLeftPegAuto()); //Autonomous chooser for the left peg
+		
+		chooser.addObject("Red Right Peg", new RedRightPegAuto());
+		
+		chooser.addObject("Red Left Peg", new RedLeftPegAuto());
 		
 		//chooser.addObject("Pixy", new PixyCmd()); //Autonomous chooser for testing the pixy camera command
 		
-		chooser.addObject("5 Point Line", new DriveStraightCmd(100)); //Autonomous chooser for testing driving straight for 4 feet
+		chooser.addObject("Baseline", new DriveStraightCmd(100)); //Autonomous chooser for testing driving straight for 4 feet
 		
-		chooser.addObject("Turn Left", new GyroTurnCmd(60)); //Autonomous chooser for testing the turning to 35 degrees
-		
-		chooser.addObject("Turn Right", new GyroTurnCmd(-60)); //Autonomous chooser for testing the turning to -35 degrees
+//		chooser.addObject("Turn Left", new GyroTurnCmd(60)); //Autonomous chooser for testing the turning to 35 degrees
+//		
+//		chooser.addObject("Turn Right", new GyroTurnCmd(-60)); //Autonomous chooser for testing the turning to -35 degrees
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		//SmartDashboard.putBoolean("PIDStatus", this.drivetrain.driveDistancePID.onTarget());
@@ -137,6 +141,7 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putNumber("Left Distance", Robot.drivetrain.driveEncoderLeft.getDistance());
 		
+		SmartDashboard.putBoolean("isAtDistance", Robot.drivetrain.isAtDistance(86));
 		//SmartDashboard.putBoolean("isAtDistance", Robot.drivetrain.isAtDistance(100)); //Did the robot drive 100 inches?
 		//Vision.printPixyStuff();
 		Scheduler.getInstance().run();

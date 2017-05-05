@@ -27,23 +27,23 @@ public class RopeClimberCmd extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.oi.climbButton5()) {
-    		Robot.ropeclimber.climbSpeed = -0.10;
+    		Robot.ropeclimber.climbSpeed = 0.10;
     	}
     	
     	if (Robot.oi.climbButton6()) {
-    		Robot.ropeclimber.climbSpeed = -0.1;
+    		Robot.ropeclimber.climbSpeed = 1;
     	}
     	
     	if (Robot.oi.climbButton3()) {
-    		Robot.ropeclimber.climbSpeed = -0.85;
+    		Robot.ropeclimber.climbSpeed = 0.85;
     	}
     	
     	if (Robot.oi.climbButton4()) {
-    		Robot.ropeclimber.climbSpeed = -0.90;
+    		Robot.ropeclimber.climbSpeed = 0.90;
     	}
     	
     	if (Robot.oi.getButton2()) {
-    		Robot.ropeclimber.climbSpeed = 80;
+    		Robot.ropeclimber.climbSpeed = -80;
     	}
     	Robot.ropeclimber.climbTheRope();
     	
