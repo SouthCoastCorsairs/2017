@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 	
 public class DriveWithJoystickCmd extends Command {
-	public double speed = 1;
 //This is the speed of the robot
     public DriveWithJoystickCmd() {
        requires(Robot.drivetrain);
@@ -22,27 +21,23 @@ public class DriveWithJoystickCmd extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if (Robot.oi.getButton6()) { //75% speed
-    		speed = 0.75;
+    	if (Robot.oi.getButton6()) { //100%
+    		Robot.drivetrain.speed = 1;
     	}
     	
     	if (Robot.oi.getButton5()) { //Quarter speed
-    		speed = 0.25;
+    		Robot.drivetrain.speed = 0.25;
     	}
     	
-    	if (Robot.oi.getButton4()) { //Full speed
-    		speed = 1;
-    		//Makes robot go into HYPERDRIVE!!!!!!
-    	}
-    	
-    	if (Robot.oi.reverseButton()) {
-    		speed = -0.25;
+    	if (Robot.oi.getButton4()) { //75%
+    		Robot.drivetrain.speed = .75;
+    		
     	}
     	
     	if (Robot.oi.getButton3()) {
-    		speed = 0.50;
+    		Robot.drivetrain.speed = 0.50;
     	}
-    	Robot.drivetrain.drive((Robot.oi.getJoystickX()*speed), (Robot.oi.getJoystickY()*speed));
+    	Robot.drivetrain.drive((Robot.oi.getJoystickX()*(Robot.drivetrain.speed)), (Robot.oi.getJoystickY()*(Robot.drivetrain.speed)));
     }
 
     // Make this return true when this Command no longer needs to run execute()

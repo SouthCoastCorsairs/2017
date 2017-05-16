@@ -39,6 +39,7 @@ public class Drivetrain extends Subsystem {
    public PIDController driveDistancePID = new PIDController(RobotMap.P_DRIVE, RobotMap.I_DRIVE, RobotMap.D_DRIVE, new DriveDistanceSource(), new DriveDistanceOutput());
    
     final double GYRO_P = (0.018); //P value of the gyro (may change) 0.0196
+    public double speed = 1;
     public boolean timerStart = false;
 	public boolean atTarget = false;
 	public Timer timer = new Timer();

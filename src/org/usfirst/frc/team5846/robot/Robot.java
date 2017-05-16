@@ -184,7 +184,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Rope Speed", Robot.ropeclimber.climbSpeed);
 		
 		
-		SmartDashboard.putNumber("Robot Speed", Robot.arcadedrive.speed);
+		SmartDashboard.putNumber("Robot Speed", Robot.drivetrain.speed);
 		
 		
 		Scheduler.getInstance().run();
