@@ -9,9 +9,9 @@ public class RedLeftPegAuto extends CommandGroup {
 
     public RedLeftPegAuto() {
     	
-    	addSequential(new DriveStraightCmd(62)); //Drive straight for x inches
+    	addSequential(new DriveStraightCmd(67)); //Drive straight for x inches
 	 	
-    	addSequential(new GyroTurnCmd(60)); //Turn x degrees
+    	addSequential(new GyroTurnCmd(60), 4); //Turn x degrees
     	
     	//addSequential(new AutoTurnLeftCmd(0.74)); //Timed turning for x seconds (May change to GyroTurnCmd for precise turning)
     	

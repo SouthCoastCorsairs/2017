@@ -14,9 +14,9 @@ public class BlueLeftPegAuto extends CommandGroup {
     	
 //Steps for the right peg autonomous
     	
-    	addSequential(new DriveStraightCmd(64)); //Drive straight for x inches
+    	addSequential(new DriveStraightCmd(66)); //Drive straight for x inches
     	 	
-    	addSequential(new GyroTurnCmd(60)); //Turn x degrees
+    	addSequential(new GyroTurnCmd(60), 4); //Turn x degrees
     	
     	//addSequential(new AutoTurnLeftCmd(0.74)); //Timed turning for x seconds (May change to GyroTurnCmd for precise turning)
     	

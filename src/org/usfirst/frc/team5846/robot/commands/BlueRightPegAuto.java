@@ -15,13 +15,13 @@ public class BlueRightPegAuto extends CommandGroup {
     	
     	addSequential(new DriveStraightCmd(62)); //Drive straight for x inches
     	
-    	addSequential(new GyroTurnCmd(-60)); //Turn x degrees
+    	addSequential(new GyroTurnCmd(-60), 3); //Turn x degrees
     	
     	//addSequential(new AutoTurnLeftCmd(0.74)); //Timed turning for x seconds (May change to GyroTurnCmd for precise turning)
     	
     	
     	//addSequential(new WaitCommand(1.0)); //Wait for x seconds
-    	
+    
     	//addSequential(new PixyCmd()); //Lines up the robot to the target using the pixy
     	
     	addSequential(new DriveStraightCmd(85)); //Drive straight for x inches

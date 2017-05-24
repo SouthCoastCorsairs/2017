@@ -130,6 +130,11 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putBoolean("isAtAngle", Robot.drivetrain.isAtTurnTarget(60)); //Is the robot at 35 degrees?
 		
 		//SmartDashboard.putBoolean("isAtNegativeAngle", Robot.drivetrain.isAtTurnTarget(-60)); //Is the robot at -35 degrees?
+		SmartDashboard.putNumber("Gyro Rate", Robot.drivetrain.getGyroRate());
+		
+		SmartDashboard.putNumber("Encoder Rate Left", Robot.drivetrain.getRateLeft());
+		
+		SmartDashboard.putNumber("Encoder Rate Right", Robot.drivetrain.getRateRight());
 		
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getAngle()); //Gets the angle from the gyro
 		

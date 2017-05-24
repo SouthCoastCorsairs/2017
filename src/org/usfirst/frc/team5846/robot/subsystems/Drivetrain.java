@@ -93,6 +93,24 @@ public class Drivetrain extends Subsystem {
     	driveEncoder.setDistancePerPulse(6*Math.PI / 360); 
     	driveEncoderLeft.setDistancePerPulse(6*Math.PI / 360);
     }
+    
+    public double convertAngleToTankDrive(double Angle) {
+    	if(Angle > 90) {
+    		Angle = 90;
+    	}
+    	if(Angle <-90) {
+    		Angle = -90;
+    	}
+    	
+    	double Power = Math.sin(Angle * (Math.PI/180));
+    	
+    	return Power;
+    	
+    	
+    }
+     
+    
+    
     public boolean isAtDistance(double distance) {
     	if (driveEncoder.getDistance() > (distance) && driveEncoderLeft.getDistance() > (distance)) {
     		Robot.drivetrain.stopTank();
@@ -126,18 +144,18 @@ public class Drivetrain extends Subsystem {
 
     	speed = headingCorrection(target);
     	
-    	if (speed > .20){
-    		speed = .20; 
+    	if (speed > .25){
+    		speed = .25; 
     	}
-    	if(speed < -.20){ 
-    		speed = -.20;
+    	if(speed < -.25){ 
+    		speed = -.25;
     	}
     	
-    	if (speed < .13 && speed > 0){//real robot is .25 everywhere
-    		speed = .13;
+    	if (speed < .15 && speed > 0){//real robot is .25 everywhere
+    		speed = .15;
     	}
-    	if(speed > -.13 && speed < 0){ 
-    		speed = -.13;
+    	if(speed > -.15 && speed < 0){ 
+    		speed = -.15;
     	}
     	
     	return speed;
@@ -231,9 +249,19 @@ public class Drivetrain extends Subsystem {
     public double getAngle(){
     	return ahrs.getAngle();
     }
+    public double getGyroRate() {
+    	return ahrs.getRate();
+    }
+    public double getRateRight() {
+    	return driveEncoder.getRate();
+    }
+    public double getRateLeft() {
+    	return driveEncoderLeft.getRate();
+    }
     public void resetDriveEncoders() {
     	driveEncoder.reset();
     	driveEncoderLeft.reset();
     }
+ 
 }
 
