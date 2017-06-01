@@ -17,6 +17,8 @@ public class RobotMap {
 	//public static final int POCKET_OPENER = 4; //4
 	public static final int ROPE_CLIMBER_SPARK = 5; //5
 	public static final int ROPE_CLIMBER_TALON = 6; //6
+	public static final int GEAR_PICKUP_VICTOR = 7;
+	public static final int GEAR_PICKUP_VICTOR2 = 8;
 	
 	//ENCODERS
 	public static final int DRIVE_ENCODER_A = 2; //2

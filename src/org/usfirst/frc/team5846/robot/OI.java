@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
+	
 	private Joystick logistick = new Joystick(0); //Driving Joystick
 	//Ports are here 
 	private Joystick logistick2 = new Joystick(1); //Manipulating Joystick
@@ -33,6 +34,13 @@ public class OI {
 		return logistick2.getRawAxis(1);
 	}
 	
+	public double getPOVup() {
+		return logistick2.getPOV(0);
+	}
+	
+	public double getPOVdown() {
+		return logistick2.getPOV(4);
+	}
 	
 	//// CREATING BUTTONS
 	

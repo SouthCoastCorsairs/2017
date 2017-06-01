@@ -11,6 +11,7 @@ import org.usfirst.frc.team5846.robot.commands.RedRightPegAuto;
 import org.usfirst.frc.team5846.robot.commands.BlueRightPegAuto;
 import org.usfirst.frc.team5846.robot.commands.MiddlePegAuto;
 import org.usfirst.frc.team5846.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team5846.robot.subsystems.GearPickup;
 import org.usfirst.frc.team5846.robot.subsystems.PID;
 import org.usfirst.frc.team5846.robot.subsystems.RopeClimber;
 import org.usfirst.frc.team5846.robot.subsystems.Vision;
@@ -40,6 +41,7 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static RopeClimber ropeclimber = new RopeClimber();
 	public static DriveWithJoystickCmd arcadedrive = new DriveWithJoystickCmd();
+	public static GearPickup gearpickup = new GearPickup();
 	public static Vision vision = new Vision();
 	public static PID pid = new PID();
 	Command autonomousCommand;
