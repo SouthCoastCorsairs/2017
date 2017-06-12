@@ -1,6 +1,11 @@
 
 package org.usfirst.frc.team5846.robot;
 
+import org.usfirst.frc.team5846.robot.commands.BackBlueLeftPegAuto;
+import org.usfirst.frc.team5846.robot.commands.BackBlueRightPegAuto;
+import org.usfirst.frc.team5846.robot.commands.BackMiddlePegAuto;
+import org.usfirst.frc.team5846.robot.commands.BackRedLeftPegAuto;
+import org.usfirst.frc.team5846.robot.commands.BackRedRightPegAuto;
 import org.usfirst.frc.team5846.robot.commands.BlueLeftPegAuto;
 import org.usfirst.frc.team5846.robot.commands.DriveStraightCmd;
 import org.usfirst.frc.team5846.robot.commands.DriveWithJoystickCmd;
@@ -9,6 +14,7 @@ import org.usfirst.frc.team5846.robot.commands.PixyCmd;
 import org.usfirst.frc.team5846.robot.commands.RedLeftPegAuto;
 import org.usfirst.frc.team5846.robot.commands.RedRightPegAuto;
 import org.usfirst.frc.team5846.robot.commands.BlueRightPegAuto;
+import org.usfirst.frc.team5846.robot.commands.DriveBackwardCmd;
 import org.usfirst.frc.team5846.robot.commands.MiddlePegAuto;
 import org.usfirst.frc.team5846.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5846.robot.subsystems.GearPickup;
@@ -68,6 +74,20 @@ public class Robot extends IterativeRobot {
 		//chooser.addObject("Pixy", new PixyCmd()); //Autonomous chooser for testing the pixy camera command
 		
 		chooser.addObject("Baseline", new DriveStraightCmd(100)); //Autonomous chooser for testing driving straight for 4 feet
+		
+		chooser.addObject("BACK MIDDLE", new BackMiddlePegAuto());
+		
+		chooser.addObject("BACK RED RIGHT", new BackRedRightPegAuto());
+		
+		chooser.addObject("BACK RED LEFT", new BackRedLeftPegAuto());
+		
+		chooser.addObject("BACK BLUE RIGHT", new BackBlueRightPegAuto());
+		
+		chooser.addObject("BACK BLUE LEFT", new BackBlueLeftPegAuto());
+		
+		chooser.addObject("BACK BASELINE", new DriveBackwardCmd(-100));
+		
+		
 		
 //		chooser.addObject("Turn Left", new GyroTurnCmd(60)); //Autonomous chooser for testing the turning to 35 degrees
 //		

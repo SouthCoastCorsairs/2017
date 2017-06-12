@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5846.robot.commands;
 
 import org.usfirst.frc.team5846.robot.Robot;
+import org.usfirst.frc.team5846.robot.subsystems.GearPickup;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,10 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearPickupCmd extends Command {
-	double scale = 0.25;
+public class TimedGearCmd extends Command {
 
-    public GearPickupCmd() {
+    public TimedGearCmd() {
     	requires(Robot.gearpickup);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -19,29 +19,28 @@ public class GearPickupCmd extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.gearpickup.initializeCounter();
+    	Robot.gearpickup.initalizeCounter2();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getPOVup() == 0) {
-    		Robot.gearpickup.intakePower = 0.75;
+    	if(Robot.oi.getButton7()) {
+    		Robot.gearpickup.armUp();
     	}
-    	if(Robot.oi.getPOVdown() == 4) {
-    		Robot.gearpickup.intakePower = -0.75;
+    	if(Robot.oi.getButton8()) {
+    		Robot.gearpickup.armDown();
     	}
-    	Robot.gearpickup.Intake();
-    	
-    	Robot.gearpickup.Window(Robot.oi.getJoystick2Y() * scale);
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.gearpickup.isSwitchSet() || Robot.gearpickup.isSwitch2Set();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.gearpickup.armStop();
     }
 
     // Called when another command which requires one or more of the same

@@ -90,6 +90,14 @@ public class OI {
 	public boolean getButton2() {
 		return logistick2.getRawButton(2);
 	}
+	
+	public boolean getButton7() {
+		return logistick2.getRawButton(7);
+	}
+	
+	public boolean getButton8() {
+		return logistick2.getRawButton(8);
+	}
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button

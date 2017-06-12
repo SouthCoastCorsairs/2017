@@ -6,6 +6,8 @@ import org.usfirst.frc.team5846.robot.commands.DriveWithJoystickCmd;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -36,6 +38,8 @@ public class Drivetrain extends Subsystem {
    public Encoder driveEncoder = new Encoder(RobotMap.DRIVE_ENCODER_A, RobotMap.DRIVE_ENCODER_B);
    public Encoder driveEncoderLeft = new Encoder(RobotMap.DRIVE_ENCODER_A2, RobotMap.DRIVE_ENCODER_B2);
    
+  
+   
    public PIDController driveDistancePID = new PIDController(RobotMap.P_DRIVE, RobotMap.I_DRIVE, RobotMap.D_DRIVE, new DriveDistanceSource(), new DriveDistanceOutput());
    
     final double GYRO_P = (0.018); //P value of the gyro (may change) 0.0196
@@ -65,6 +69,8 @@ public class Drivetrain extends Subsystem {
     	frontrightDrive.set(rightPower);
     	backrightDrive.set(rightPower);
     }
+    
+    
     public void slowDown() {
     	this.tankDrive(0, 0);
     }
