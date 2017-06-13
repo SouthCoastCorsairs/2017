@@ -39,7 +39,7 @@ public class DriveWithJoystickCmd extends Command {
     	}
     	
     	if(Robot.oi.reverseButton()) {
-    		Robot.drivetrain.speed = -0.60;
+    		Robot.drivetrain.speed = -0.80;
     	}
     	Robot.drivetrain.drive((Robot.oi.getJoystickX()*(Robot.drivetrain.speed)), (Robot.oi.getJoystickY()*(Robot.drivetrain.speed)));
     }
