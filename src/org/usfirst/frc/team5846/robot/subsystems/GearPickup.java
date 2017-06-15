@@ -26,7 +26,7 @@ public class GearPickup extends Subsystem {
 	    }
 	 
 	 public boolean isSwitch2Set() {
-		 return counter2.get() > 0;
+		 return counter.get() > 0;
 	 }
 	    
 	    public void initializeCounter() {

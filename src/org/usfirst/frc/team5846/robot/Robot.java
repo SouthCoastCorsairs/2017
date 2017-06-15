@@ -1,6 +1,9 @@
 
 package org.usfirst.frc.team5846.robot;
 
+import org.usfirst.frc.team5846.robot.commands.ActiveLeftAuto;
+import org.usfirst.frc.team5846.robot.commands.ActiveMiddleAuto;
+import org.usfirst.frc.team5846.robot.commands.ActiveRightAuto;
 import org.usfirst.frc.team5846.robot.commands.BackBlueLeftPegAuto;
 import org.usfirst.frc.team5846.robot.commands.BackBlueRightPegAuto;
 import org.usfirst.frc.team5846.robot.commands.BackMiddlePegAuto;
@@ -61,7 +64,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		
-		chooser.addDefault("Middle Peg", new MiddlePegAuto()); //Autonomous chooser for the middle peg
+		chooser.addObject("Middle Peg", new MiddlePegAuto()); //Autonomous chooser for the middle peg
 		
 		chooser.addObject("Blue Right Peg", new BlueRightPegAuto()); //Autonomous chooser for the right peg
 		
@@ -86,6 +89,12 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("BACK BLUE LEFT", new BackBlueLeftPegAuto());
 		
 		chooser.addObject("BACK BASELINE", new DriveBackwardCmd(-100));
+		
+		chooser.addDefault("ACTIVE MIDDLE", new ActiveMiddleAuto());
+		
+		chooser.addObject("ACTIVE RIGHT", new ActiveRightAuto());
+		
+		chooser.addObject("ACTIVE LEFT", new ActiveLeftAuto());
 		
 		
 		
@@ -212,6 +221,8 @@ public class Robot extends IterativeRobot {
 		
 		
 		SmartDashboard.putNumber("Robot Speed", Robot.drivetrain.speed);
+		
+		SmartDashboard.putNumber("Intake Power", Robot.gearpickup.intakePower);
 		
 		
 		Scheduler.getInstance().run();

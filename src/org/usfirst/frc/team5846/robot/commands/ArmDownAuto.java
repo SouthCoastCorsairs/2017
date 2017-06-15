@@ -1,17 +1,15 @@
 package org.usfirst.frc.team5846.robot.commands;
 
 import org.usfirst.frc.team5846.robot.Robot;
-import org.usfirst.frc.team5846.robot.subsystems.GearPickup;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TimedGearCmd extends Command {
+public class ArmDownAuto extends Command {
 
-    public TimedGearCmd() {
+    public ArmDownAuto() {
     	requires(Robot.gearpickup);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -25,17 +23,12 @@ public class TimedGearCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getButton7()) {
-    		Robot.gearpickup.armUp();
-    	}
-    	if(Robot.oi.getButton8()) {
-    		Robot.gearpickup.armDown();
-    	}
+    	Robot.gearpickup.armDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.gearpickup.isSwitchSet() || Robot.gearpickup.isSwitch2Set();
+        return Robot.gearpickup.isSwitchSet();
     }
 
     // Called once after isFinished returns true
