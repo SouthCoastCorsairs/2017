@@ -49,9 +49,6 @@ public class PIDdrive extends Command {
 
     	}
     	// stop turning
-    	else{
-    		
-    	}
     	
     }
 
@@ -62,10 +59,12 @@ public class PIDdrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drivetrain.stopTank();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+
 }

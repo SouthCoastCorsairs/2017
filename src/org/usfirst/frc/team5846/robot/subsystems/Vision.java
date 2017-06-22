@@ -35,9 +35,6 @@ public class Vision extends Subsystem {
     		i++;
     		if (i > 50)
     			i = 49;
-    		while (!(pixyValues[i] == 85 && pixyValues[i + 1] == -86) && i < 50) {
-    			i++;
-    		}
     		xPosition = (char) (((pixyValues[i + 7] & 0xff) << 8) | (pixyValues[i + 6] & 0xff));
     		char yPosition = (char) ((pixyValues[i + 9] & 0xff << 8) | pixyValues[i + 8] & 0xff);
     		char width = (char) ((pixyValues[i + 11] & 0xff << 8) | pixyValues[i + 10] & 0xff);

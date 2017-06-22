@@ -95,6 +95,7 @@ public class Drivetrain extends Subsystem {
     	this.drive(0, 0);
     }
     
+    
     public void initEncoder() {
     	driveEncoder.setDistancePerPulse(6*Math.PI / 360); 
     	driveEncoderLeft.setDistancePerPulse(6*Math.PI / 360);

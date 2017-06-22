@@ -23,12 +23,14 @@ public class GearPickupCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getPOVup() == 0) {
-    		Robot.gearpickup.intakePower = 0.75;
+    	if (Robot.oi.getPOV() == 0 || Robot.oi.getPOV() == 45 || Robot.oi.getPOV() == 315) {
+    		Robot.gearpickup.intakePower = 0.5;
     	}
-    	if(Robot.oi.getPOVdown() == 4) {
-    		Robot.gearpickup.intakePower = -0.75;
+    	
+    	else if (Robot.oi.getPOV() == 135 || Robot.oi.getPOV() == 180 || Robot.oi.getPOV() == 225) {
+    		Robot.gearpickup.intakePower = -0.5;
     	}
+    	
     	else {
     		Robot.gearpickup.intakePower = 0;    		
     	}

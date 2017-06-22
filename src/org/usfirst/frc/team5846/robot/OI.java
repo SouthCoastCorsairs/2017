@@ -34,12 +34,8 @@ public class OI {
 		return logistick2.getRawAxis(1);
 	}
 	
-	public double getPOVup() {
-		return logistick2.getPOV(0);
-	}
-	
-	public double getPOVdown() {
-		return logistick2.getPOV(4);
+	public double getPOV() {
+		return logistick2.getPOV();
 	}
 	
 	//// CREATING BUTTONS
